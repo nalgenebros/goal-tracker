@@ -69,33 +69,36 @@ renderTasks() {
     render() {
         return (
       <View style={styles.container}>
-        <ScrollView style={{ width: 300, height: 300, backgroundColor: '#4CAF50' }}>
-          {this.renderTasks()}
-        </ScrollView>
-
-        <View style={{ paddingTop: 5 }}>
-            <Button onPress={this.navToCalendar.bind(this)}>Calendar</Button>
-        </View>
-        
-        <View style={{ width: 300, height: 120, marginBottom: 10, backgroundColor: '#4CAF50' }}>
-          <Input
-            onSubmitEditing={this.addTask.bind(this)}
-            placeholderTextColor={'#FFF'}
-            placeholder='Add a Task!' 
-            onChangeText={this.taskTextChange.bind(this)} 
-            value={this.state.taskToAdd} 
-          />
-          <Button onPress={this.addTask.bind(this)}>
-            Add
-          </Button>
-        </View>
-        <AlertModal 
-          visible={this.state.alertModalVisible} 
-          modalText='Please add a task name!'
-          closeModal={this.closeModal.bind(this)}
-          closeText='OK'
-        />
-
+        <Card>
+          <CardSection>
+                <ScrollView style={{ width: 300, height: 300, backgroundColor: '#4CAF50' }}>
+                  {this.renderTasks()}
+                </ScrollView>
+          </CardSection>
+          <CardSection>
+                    <Button onPress={this.navToCalendar.bind(this)}>Calendar</Button>
+          </CardSection>
+          <CardSection>   
+                <View style={{ width: 300, height: 120, marginBottom: 10, backgroundColor: '#4CAF50' }}>
+                  <Input
+                    onSubmitEditing={this.addTask.bind(this)}
+                    placeholderTextColor={'#FFF'}
+                    placeholder='Add a Task!' 
+                    onChangeText={this.taskTextChange.bind(this)} 
+                    value={this.state.taskToAdd} 
+                  />
+                  <Button onPress={this.addTask.bind(this)}>
+                    Add
+                  </Button>
+                </View>
+          </CardSection>
+                <AlertModal 
+                  visible={this.state.alertModalVisible} 
+                  modalText='Please add a task name!'
+                  closeModal={this.closeModal.bind(this)}
+                  closeText='OK'
+                />
+        </Card>
       </View>
         );
     }
