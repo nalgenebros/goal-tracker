@@ -3,6 +3,7 @@ import { View, ScrollView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Task from './Task';
 import { AlertModal, Input, Button } from './common';
+import { Card, CardSection } from './gridercommon';
 import styles from '../styles/styles';
 
 class TasksHome extends Component {
