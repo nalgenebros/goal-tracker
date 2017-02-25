@@ -2,6 +2,7 @@ import React from 'react';
 import { TextInput, View, Text } from 'react-native';
 
 const Input = ({ 
+    onSubmitEditing,
     label, 
     value, 
     onChangeText, 
@@ -14,6 +15,7 @@ const Input = ({
             <View>
                 <Text style={labelStyle}>{label}</Text>
                 <TextInput
+                onSubmitEditing={onSubmitEditing}
                 placeholderTextColor={placeholderTextColor}
                 secureTextEntry={secureTextEntry}
                 placeholder={placeholder}
