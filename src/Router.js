@@ -10,6 +10,7 @@ const RouterComponent = () => {
     <Router
       navigationBarStyle={transparentBorder} 
       sceneStyle={{ borderWidth: 0, paddingTop: 65 }}
+      barButtonIconStyle={{ tintColor: '#FFF' }}
     >
       <Scene key="auth">
         <Scene 
