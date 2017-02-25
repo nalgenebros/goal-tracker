@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Animated, Text } from 'react-native';
 import { Button } from './common';
 import styles from '../styles/styles';
 
@@ -7,12 +7,12 @@ class Task extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-         status: this.props.status   
+         status: this.props.status,
+         fadeAnim: new Animated.Value(0) 
         };
     }
     componentDidMount() {
-        console.log('RENDERING TASK', this.props.text);
-        console.log('STATE', this.state);
+        Animated.timing(this.state.fadeAnim, { toValue: 1 }).start();                
     }
     removeTask() {
         this.props.removeTask(this.props.index);
@@ -37,7 +37,7 @@ class Task extends Component {
     }
     render() {
         return (
-        <View style={{ padding: 5 }}>
+        <Animated.View style={{ padding: 5, opacity: this.state.fadeAnim }}>
             <Text style={styles.welcome}> {this.props.text} </Text>
             <Text style={styles.welcome}> COMPLETED: {this.completeOrNah()} </Text>
             <Button onPress={this.completeTask.bind(this)}>
@@ -46,7 +46,7 @@ class Task extends Component {
             <Button onPress={this.removeTask.bind(this)}>
                 X
             </Button>
-        </View>);
+        </Animated.View>);
     }
 }
 
