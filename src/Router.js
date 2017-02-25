@@ -8,16 +8,24 @@ const RouterComponent = () => {
   const { transparentBorder, navBarStyle, textStyle } = styles;
   return (
     <Router
-    	navigationBarStyle={transparentBorder} 
-    	sceneStyle={{ borderWidth: 0, paddingTop: 65 }}
+      navigationBarStyle={transparentBorder} 
+      sceneStyle={{ borderWidth: 0, paddingTop: 65 }}
     >
-    	<Scene key="auth">
-    		<Scene key="login" component={LoginForm} title="Authentication" />
-    	</Scene>
+      <Scene key="auth">
+        <Scene 
+        navigationBarStyle={navBarStyle} 
+        titleStyle={textStyle}
+        key="login" 
+        component={LoginForm} 
+        title="GoalTracker" 
+        />
+      </Scene>
+
       <Scene key='main' navigationBarStyle={navBarStyle} titleStyle={textStyle}>
         <Scene navigationBarStyle={navBarStyle} key="tasks" component={TasksHome} title="Tasks" />
         <Scene navigationBarStyle={navBarStyle} key="cal" component={Calendar} title="Calendar" />
       </Scene>
+
     </Router>
   );
 };
