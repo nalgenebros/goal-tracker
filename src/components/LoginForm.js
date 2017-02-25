@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
 import { Text } from 'react-native';
 import firebase from 'firebase';
 import { Button, Card, CardSection, Input, Spinner } from './gridercommon';
@@ -30,7 +31,8 @@ class LoginForm extends Component {
 			password: '',
 			loading: false,
 			error: ''
-		})
+		});
+		Actions.main();
 	}
 
 	renderButton() {
