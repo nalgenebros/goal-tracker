@@ -61,7 +61,8 @@ class LoginForm extends Component {
 						/>
 					</CardSection>
 					<CardSection>
-						<Input 
+						<Input
+							onSubmitEditing={this.onButtonPress.bind(this)} 
 							placeholderTextColor='#FFF'
 							secureTextEntry
 							placeholder="password"

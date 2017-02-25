@@ -7,13 +7,15 @@ const Input = ({
   onChangeText, 
   placeholder, 
   placeholderTextColor, 
-  secureTextEntry }) => {
+  secureTextEntry,
+  onSubmitEditing }) => {
   const { inputStyle, labelStyle, containerStyle } = styles;
 
   return (
     <View style={containerStyle}>
       <Text style={labelStyle}>{label}</Text>
       <TextInput
+        onSubmitEditing={onSubmitEditing}
         secureTextEntry={secureTextEntry}
         placeholderTextColor={placeholderTextColor}
         placeholder={placeholder}
