@@ -7,7 +7,11 @@ class AlertModal extends Component {
   render() {
     return (
         <Modal
-          animationType={'slide'}
+          style={{
+             height: 500,
+             width: 300
+          }}
+          animationType={'fade'}
           transparent={false}
           visible={this.props.visible}
           onRequestClose={() => { alert('Modal has been closed.'); }}
@@ -15,7 +19,7 @@ class AlertModal extends Component {
          <View
             style={{ 
              marginTop: 22,
-             alignItems: 'center'
+             alignItems: 'center',
             }}
          >
           <View>

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import firebase from 'firebase';
-import { Button, Card, CardSection, Input, Spinner } from './gridercommon';
+import { Button } from './common';
+import { Card, CardSection, Input, Spinner } from './gridercommon';
 
 class LoginForm extends Component {
 	state = { email: '', password: '', error: '', loading: false };
@@ -18,7 +19,7 @@ class LoginForm extends Component {
 				firebase.auth().createUserWithEmailAndPassword(email, password)
 					.then(this.onLoginSuccess.bind(this))
 					.catch(this.onLoginFail.bind(this));
-			})
+			});
 	}
 
 	onLoginFail() {
@@ -43,46 +44,55 @@ class LoginForm extends Component {
 			<Button onPress={this.onButtonPress.bind(this)}>
 				Log In
 			</Button>
-		)
+		);
 	}
 
 	render() {
 		return (
-			<Card>
-				<CardSection>
-					<Input 
-						placeholder="user@gmail.com"
-						label="Email"
-						value={this.state.email}
-						onChangeText={email => this.setState({ email })}
-					/>
-				</CardSection>
-				<CardSection>
-					<Input 
-						secureTextEntry
-						placeholder="password"
-						label="Password"
-						value={this.state.password}
-						onChangeText={password => this.setState({ password })}
-					/>
-				</CardSection>
-				<Text style={styles.errorTextStyle}>
-					{this.state.error}
-				</Text>
-				<CardSection>
-					{this.renderButton()}
-				</CardSection>
-			</Card>
-		)
+			<View style={styles.container}>
+				<Card>
+					<CardSection>
+						<Input 
+							placeholderTextColor='#FFF'
+							placeholder="user@gmail.com"
+							label="Email"
+							value={this.state.email}
+							onChangeText={email => this.setState({ email })}
+						/>
+					</CardSection>
+					<CardSection>
+						<Input
+							onSubmitEditing={this.onButtonPress.bind(this)} 
+							placeholderTextColor='#FFF'
+							secureTextEntry
+							placeholder="password"
+							label="Password"
+							value={this.state.password}
+							onChangeText={password => this.setState({ password })}
+						/>
+					</CardSection>
+					<Text style={styles.errorTextStyle}>
+						{this.state.error}
+					</Text>
+					<CardSection>
+						{this.renderButton()}
+					</CardSection>
+				</Card>
+			</View>
+		);
 	}
 }
 
 const styles = {
+	container: {
+		flex: 1,
+		backgroundColor: '#4CAF50'
+  },
 	errorTextStyle: {
 		fontSize: 20,
 		alignSelf: 'center',
 		color: 'red'
 	}
-}
+};
 
 export default LoginForm;
