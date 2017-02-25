@@ -77,7 +77,8 @@ renderTasks() {
         </View>
         
         <View style={{ width: 300, height: 120, marginBottom: 10, backgroundColor: '#4CAF50' }}>
-          <Input 
+          <Input
+            onSubmitEditing={this.addTask.bind(this)}
             placeholderTextColor={'#FFF'}
             placeholder='Add a Task!' 
             onChangeText={this.taskTextChange.bind(this)} 
