@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import _ from 'lodash';
+import { View, ScrollView, ListView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 import Task from './Task';
 import { AlertModal, Input, Button } from './common';
 import { Card, CardSection } from './gridercommon';
+import { tasksFetch } from '../actions';
 import styles from '../styles/styles';
 
 class TasksHome extends Component {
@@ -14,6 +17,23 @@ class TasksHome extends Component {
       tasks: [],
       alertModalVisible: false
      };
+  }
+  componentWillMount() {
+      this.props.tasksFetch();
+      this.createDataSource(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+      //nextProps are the next set of props that this component will be rendered cloneWithRows
+      //this.props is still the old set of props
+      this.createDataSource(nextProps);
+  }
+  createDataSource({ tasks }) {
+      const ds = new ListView.DataSource({
+          rowHasChanged: (r1, r2) => r1 !== r2
+      });
+
+      this.dataSource = ds.cloneWithRows(tasks);
   }
 
 addTask() {
@@ -34,6 +54,9 @@ addTask() {
   }
 }
 
+navToCreateTask() {
+  Actions.createTask();
+}
 removeTask(index) {
   const tasks = this.state.tasks;
   tasks.splice(index, 1);
@@ -52,46 +75,55 @@ taskTextChange(taskToAdd) {
 navToCalendar() {
   Actions.cal();
 }
-
+/*
 renderTasks() {
-  return this.state.tasks.map(
+  return this.props.tasks.map(
       (task, index) => 
         (<Task 
           removeTask={this.removeTask.bind(this)} 
           key={index} 
           text={task.title} 
-          status={task.completed} 
+          status={task.status} 
           index={index}
         />)
     ); 
+}*/
+
+renderRow(task) {
+    return <Task text={task.title} status={task.status} />;
 }
 
     render() {
         return (
       <View style={styles.container}>
         <Card>
+
           <CardSection>
-                <ScrollView style={{ width: 300, height: 300, backgroundColor: '#4CAF50' }}>
-                  {this.renderTasks()}
-                </ScrollView>
+                <ListView 
+                enableEmptySections
+                dataSource={this.dataSource}
+                renderRow={this.renderRow}
+                style={{ width: 300, height: 420, backgroundColor: '#4CAF50' }} 
+                />
           </CardSection>
-          <CardSection>
-                    <Button onPress={this.navToCalendar.bind(this)}>Calendar</Button>
-          </CardSection>
+
           <CardSection>   
-                <View style={{ width: 300, height: 120, marginBottom: 10, backgroundColor: '#4CAF50' }}>
-                  <Input
+                {/*<View 
+                style={{ width: 300, height: 50, marginBottom: 10, backgroundColor: '#4CAF50' }}
+                >*/}
+                  {/*<Input
                     onSubmitEditing={this.addTask.bind(this)}
                     placeholderTextColor={'#FFF'}
                     placeholder='Add a Task!' 
                     onChangeText={this.taskTextChange.bind(this)} 
                     value={this.state.taskToAdd} 
-                  />
-                  <Button onPress={this.addTask.bind(this)}>
+                  />*/}
+                  <Button onPress={this.navToCreateTask.bind(this)}>
                     Add
                   </Button>
-                </View>
+                {/*</View>*/}
           </CardSection>
+
                 <AlertModal 
                   visible={this.state.alertModalVisible} 
                   modalText='Please add a task name!'
@@ -104,4 +136,11 @@ renderTasks() {
     }
 }
 
-export default TasksHome;
+const mapStateToProps = (state) => {
+    const tasks = _.map(state.tasks, (val, uid) => {
+        return { ...val, uid };
+    });
+    return { tasks };
+};
+
+export default connect(mapStateToProps, { tasksFetch })(TasksHome);
