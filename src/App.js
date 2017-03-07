@@ -1,25 +1,20 @@
 import React, { Component } from 'react';
-import Router from './Router';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
+import ReduxThunk from 'redux-thunk';
+import Router from './Router';
 import fireconfig from '../fireconfig';
-import { Button } from './components/gridercommon';
+import reducers from './reducers';
 
 class App extends Component {
-  state = { loggedIn: null }
+
 
   componentWillMount() {
     firebase.initializeApp(fireconfig);
-
-    firebase.auth().onAuthStateChanged((user) => {
-      if(user) {
-        this.setState({ loggedIn: true });
-      } else {
-        this.setState({ loggedIn: false });
-      }
-    });
   }
 
-  renderContent() {
+  /*renderContent() {
     if(this.state.loggedIn) {
       return (
         <Button onPress={() => firebase.auth().signOut()}>
@@ -27,11 +22,14 @@ class App extends Component {
         </Button>
       )
     }
-  }
+  }*/
 
   render() {
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
     return (
-      <Router />
+      <Provider store={store}>
+        <Router />
+      </Provider>
     );
   }
 }
