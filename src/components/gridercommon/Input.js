@@ -20,6 +20,7 @@ const Input = ({
         placeholderTextColor={placeholderTextColor}
         placeholder={placeholder}
         autoCorrect={false}
+        underlineColorAndroid='#FAFAFF'
         style={inputStyle}
         value={value}
         onChangeText={onChangeText}
@@ -35,7 +36,7 @@ const styles = {
     paddingLeft: 5,
     fontSize: 18,
     lineHeight: 23,
-    flex: 2
+    flex: 2,
   },
   labelStyle: {
     fontSize: 18,
