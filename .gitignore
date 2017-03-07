@@ -1,7 +1,7 @@
 # OSX
 #
 .DS_Store
-
+.eslintrc
 # Xcode
 #
 build/
@@ -42,7 +42,7 @@ buck-out/
 \.buckd/
 android/app/libs
 *.keystore
-.eslintrc
+
 # API
 fireconfig.js
 
