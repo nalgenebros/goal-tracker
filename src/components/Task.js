@@ -24,13 +24,13 @@ class Task extends Component {
         console.log('STATE FROM COMPLETETASK CALL', this.state);
     }
     completeOrNah() {
-        if (this.state.status) {
+        if (this.state.status === 'Complete') {
             return 'COMPLETE';
         } 
             return 'INCOMPLETE';
     }
     buttonTextConditional() {
-        if (this.state.status) {
+        if (this.state.status === 'Incomplete') {
             return 'incomplete';
         } 
             return 'complete';
@@ -40,10 +40,16 @@ class Task extends Component {
         <Animated.View style={{ padding: 5, opacity: this.state.fadeAnim }}>
             <Text style={styles.welcome}> {this.props.text} </Text>
             <Text style={styles.welcome}> COMPLETED: {this.completeOrNah()} </Text>
-            <Button onPress={this.completeTask.bind(this)}>
+            {/*<Button onPress={this.completeTask.bind(this)}>
                 Tap to {this.buttonTextConditional()}
             </Button>
             <Button onPress={this.removeTask.bind(this)}>
+                X
+            </Button>*/}
+            <Button>
+                Tap to {this.buttonTextConditional()}
+            </Button>
+            <Button>
                 X
             </Button>
         </Animated.View>);
