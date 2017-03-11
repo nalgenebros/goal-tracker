@@ -35,64 +35,25 @@ class TasksHome extends Component {
 
       this.dataSource = ds.cloneWithRows(tasks);
   }
-
-addTask() {
-  console.log(this.props);
-  if (this.state.taskToAdd) {
-    const tasks = this.state.tasks.slice();
-    const task = {
-      title: this.state.taskToAdd,
-      completed: false
-    };
-    tasks.push(task);
-    this.setState({
-      tasks,
-      taskToAdd: null
-    });
-  } else {
-    this.setState({ alertModalVisible: true });
+  navToCreateTask() {
+    Actions.createTask();
   }
-}
-
-navToCreateTask() {
-  Actions.createTask();
-}
-removeTask(index) {
-  const tasks = this.state.tasks;
-  tasks.splice(index, 1);
-  this.setState({
-    tasks
-  });
-}
-
-closeModal() {
-    this.setState({ alertModalVisible: false });
-}
-
-taskTextChange(taskToAdd) {
-  this.setState({ taskToAdd });
-}
-navToCalendar() {
-  Actions.cal();
-}
-/*
-renderTasks() {
-  return this.props.tasks.map(
-      (task, index) => 
-        (<Task 
-          removeTask={this.removeTask.bind(this)} 
-          key={index} 
-          text={task.title} 
-          status={task.status} 
-          index={index}
-        />)
-    ); 
-}*/
-
-renderRow(task) {
-    return <Task text={task.title} status={task.status} task={task} />;
-}
-
+  removeTask(index) {
+    const tasks = this.state.tasks;
+    tasks.splice(index, 1);
+    this.setState({
+      tasks
+    });
+  }
+  closeModal() {
+      this.setState({ alertModalVisible: false });
+  }
+  navToCalendar() {
+    Actions.cal();
+  }
+  renderRow(task) {
+      return <Task title={task.title} status={task.status} task={task} />;
+  }
     render() {
         return (
       <View style={styles.container}>
@@ -108,22 +69,10 @@ renderRow(task) {
           </CardSection>
 
           <CardSection>   
-                {/*<View 
-                style={{ width: 300, height: 50, marginBottom: 10, backgroundColor: '#4CAF50' }}
-                >*/}
-                  {/*<Input
-                    onSubmitEditing={this.addTask.bind(this)}
-                    placeholderTextColor={'#FFF'}
-                    placeholder='Add a Task!' 
-                    onChangeText={this.taskTextChange.bind(this)} 
-                    value={this.state.taskToAdd} 
-                  />*/}
                   <Button onPress={this.navToCreateTask.bind(this)}>
-                    Add
+                    Create Task
                   </Button>
-                {/*</View>*/}
           </CardSection>
-
                 <AlertModal 
                   visible={this.state.alertModalVisible} 
                   modalText='Please add a task name!'
