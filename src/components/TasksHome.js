@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { View, ScrollView, ListView } from 'react-native';
+import { View, ListView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import Task from './Task';
-import { AlertModal, Input, Button } from './common';
+import { AlertModal, Button } from './common';
 import { Card, CardSection } from './gridercommon';
 import { tasksFetch } from '../actions';
 import styles from '../styles/styles';
@@ -90,7 +90,7 @@ renderTasks() {
 }*/
 
 renderRow(task) {
-    return <Task text={task.title} status={task.status} />;
+    return <Task text={task.title} status={task.status} task={task} />;
 }
 
     render() {
