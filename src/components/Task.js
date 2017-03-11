@@ -13,6 +13,7 @@ class Task extends Component {
          fadeAnim: new Animated.Value(0) 
         };
     }
+    
     componentDidMount() {
         Animated.timing(this.state.fadeAnim, { toValue: 1 }).start();                
     }
@@ -45,19 +46,13 @@ class Task extends Component {
     render() {
         return (
         <Animated.View style={{ padding: 5, opacity: this.state.fadeAnim }}>
-            <Text style={styles.welcome}> {this.props.text} </Text>
+            <Text style={styles.welcome}> {this.props.title} </Text>
             <Text style={styles.welcome}> {this.props.status} </Text>
-            {/*<Button onPress={this.completeTask.bind(this)}>
-                Tap to {this.buttonTextConditional()}
-            </Button>
-            <Button onPress={this.removeTask.bind(this)}>
-                X
-            </Button>*/}
             <Button onPress={this.completeTask.bind(this)} >
-                Tap to {this.buttonTextConditional()}
+                Tap to mark {this.buttonTextConditional()}
             </Button>
             <Button onPress={this.removeTask.bind(this)}>
-                X
+                Delete Task
             </Button>
         </Animated.View>);
     }
