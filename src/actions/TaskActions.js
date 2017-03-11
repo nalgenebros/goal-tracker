@@ -36,3 +36,20 @@ export const tasksFetch = () => {
          });
     };
 };
+
+export const taskEdit = ({ title, status, uid }) => {
+    const { currentUser } = firebase.auth();
+    return () => {
+    firebase.database().ref(`/users/${currentUser.uid}/tasks/${uid}`)
+     .set({ title, status })
+      .then(() => console.log('saved!'));
+    };
+};
+export const taskRemove = ({ uid }) => {
+    const { currentUser } = firebase.auth();
+    return () => {
+    firebase.database().ref(`/users/${currentUser.uid}/tasks/${uid}`)
+     .remove()
+      .then(() => console.log('removed!'));
+    };
+};
