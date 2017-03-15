@@ -7,6 +7,6 @@ export default (state = INITIAL_STATE, action) => {
         case TASKS_FETCH_SUCCESS:
             return action.payload;
         default:
-            return state;
+            return { ...state };
     }
 };
