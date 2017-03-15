@@ -20,11 +20,11 @@ class Task extends Component {
 
 
     completeTask() {
-     const { title, uid } = this.props.task;
+     const { title, uid, days } = this.props.task;
         if (this.props.status === 'Complete') {
-            this.props.taskEdit({ title, status: 'Incomplete', uid });
+            this.props.taskEdit({ title, status: 'Incomplete', days, uid });
         } else if (this.props.status === 'Incomplete') {
-            this.props.taskEdit({ title, status: 'Complete', uid });
+            this.props.taskEdit({ title, status: 'Complete', days, uid });
             }
         }
     removeTask() {
@@ -48,6 +48,7 @@ class Task extends Component {
         <Animated.View style={{ padding: 5, opacity: this.state.fadeAnim }}>
             <Text style={styles.welcome}> {this.props.title} </Text>
             <Text style={styles.welcome}> {this.props.status} </Text>
+            <Text style={styles.welcome}> {this.props.days} </Text>
             <Button onPress={this.completeTask.bind(this)} >
                 Tap to mark {this.buttonTextConditional()}
             </Button>
