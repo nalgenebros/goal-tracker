@@ -4,11 +4,15 @@ import { View, Picker, Text } from 'react-native';
 import { Button } from './common';
 import { Input, Card, CardSection, } from './gridercommon';
 import { taskUpdate, taskCreate } from '../actions';
+import DayPicker from './DayPicker';
 
 class CreateTask extends Component {
     onButtonPress() {
-        const { title, status } = this.props;
-        this.props.taskCreate({ title, status: status || 'Incomplete' });
+        const { title, status, days } = this.props;
+        this.props.taskCreate({ 
+            title,
+            status: status || 'Incomplete',
+            days });
     }
     render() {
         return (
@@ -21,11 +25,6 @@ class CreateTask extends Component {
                         onChangeText={value => this.props.taskUpdate({ prop: 'title', value })}
                         label='Task Title'
                         />
-                        {/*<Input 
-                        label='Task Name' 
-                        placeholder='Task Name' 
-                        onChangeText={value => this.props.taskUpdate({ prop: 'title', value })} 
-                        /> */}
                     </CardSection>
 
                     <CardSection >
@@ -43,6 +42,9 @@ class CreateTask extends Component {
                         <Button onPress={this.onButtonPress.bind(this)}>
                             Add Task
                         </Button>
+                    </CardSection>
+                    <CardSection>
+                        <DayPicker />
                     </CardSection>
                 </Card>
             </View>
@@ -65,9 +67,9 @@ const styles = {
 
 
 const mapStateToProps = (state) => {
-    const { title, status } = state.tasksForm;
-
-    return { title, status };
+    const { title, status, days } = state.tasksForm;
+    console.log('title', title, 'status', status, 'days', days);
+    return { title, status, days };
 };
 
 export default connect(mapStateToProps, { taskUpdate, taskCreate })(CreateTask);

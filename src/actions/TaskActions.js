@@ -9,12 +9,12 @@ export const taskUpdate = ({ prop, value }) => {
     };
 };
 
-export const taskCreate = ({ title, status }) => {
+export const taskCreate = ({ title, status, days }) => {
     const { currentUser } = firebase.auth();
     //redux thunk werkaround
     return (dispatch) => {
         firebase.database().ref(`users/${currentUser.uid}/tasks`)
-         .push({ title, status })
+         .push({ title, status, days })
           .then(() => {
               dispatch({ type: TASK_CREATE });
               Actions.tasks({ type: 'reset' });
@@ -37,11 +37,11 @@ export const tasksFetch = () => {
     };
 };
 
-export const taskEdit = ({ title, status, uid }) => {
+export const taskEdit = ({ title, status, days, uid }) => {
     const { currentUser } = firebase.auth();
     return () => {
     firebase.database().ref(`/users/${currentUser.uid}/tasks/${uid}`)
-     .set({ title, status })
+     .set({ title, status, days })
       .then(() => console.log('saved!'));
     };
 };
