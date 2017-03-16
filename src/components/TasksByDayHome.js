@@ -58,7 +58,7 @@ class TasksByDayHome extends Component {
         }
       }
     );
-    if (completedCount === this.props.tasks.length) {
+    if (completedCount === this.props.tasks.length && completedCount > 0) {
       return styles.congratulatory;
     } 
     return styles.standard;
@@ -72,7 +72,7 @@ class TasksByDayHome extends Component {
         }
       }
     );
-    if (completedCount === this.props.tasks.length) {
+    if (completedCount === this.props.tasks.length && completedCount > 0) {
       return styles.congratsContainer;
     } 
     return styles.container;
