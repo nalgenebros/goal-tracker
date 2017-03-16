@@ -13,14 +13,13 @@ class TasksHome extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      taskToAdd: null,
-      tasks: [],
       alertModalVisible: false
      };
   }
   componentWillMount() {
       this.props.tasksFetch();
       this.createDataSource(this.props);
+      console.log(this.props.tasks);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -48,8 +47,8 @@ class TasksHome extends Component {
   closeModal() {
       this.setState({ alertModalVisible: false });
   }
-  navToCalendar() {
-    Actions.cal();
+  navToDayView() {
+    Actions.tasksByDay();
   }
   renderRow(task) {
       return <Task title={task.title} status={task.status} task={task} />;
@@ -58,7 +57,6 @@ class TasksHome extends Component {
         return (
       <View style={styles.container}>
         <Card>
-
           <CardSection>
                 <ListView 
                 enableEmptySections
@@ -71,6 +69,9 @@ class TasksHome extends Component {
           <CardSection>   
                   <Button onPress={this.navToCreateTask.bind(this)}>
                     Create Task
+                  </Button> 
+                  <Button onPress={this.navToDayView.bind(this)}>
+                    Today's Tasks
                   </Button>
           </CardSection>
                 <AlertModal 
@@ -87,6 +88,7 @@ class TasksHome extends Component {
 
 const mapStateToProps = (state) => {
     const tasks = _.map(state.tasks, (val, uid) => {
+        console.log('redux state.tasks', state.tasks);
         return { ...val, uid };
     });
     return { tasks };
