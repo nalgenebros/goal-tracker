@@ -68,7 +68,6 @@ const styles = {
 
 const mapStateToProps = (state) => {
     const { title, status, days } = state.tasksForm;
-    console.log('title', title, 'status', status, 'days', days);
     return { title, status, days };
 };
 
