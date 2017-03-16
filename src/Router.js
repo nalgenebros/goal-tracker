@@ -1,9 +1,9 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
-import Calendar from './components/Calendar';
 import TasksHome from './components/TasksHome';
 import CreateTask from './components/CreateTask';
 import LoginForm from './components/LoginForm';
+import TasksByDay from './components/TasksByDayHome';
 
 const RouterComponent = () => {
   const { transparentBorder, navBarStyle, textStyle } = styles;
@@ -31,7 +31,12 @@ const RouterComponent = () => {
           component={CreateTask} 
           title="Create Task" 
         />
-        <Scene navigationBarStyle={navBarStyle} key="cal" component={Calendar} title="Calendar" />
+        <Scene 
+        navigationBarStyle={navBarStyle} 
+        key="tasksByDay" 
+        component={TasksByDay} 
+        title="Today's Tasks" 
+        />
       </Scene>
 
     </Router>
