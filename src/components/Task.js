@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Animated, Text } from 'react-native';
+import { connect } from 'react-redux';
 import { Button } from './common';
 import styles from '../styles/styles';
+import { taskEdit, taskRemove } from '../actions';
 
 class Task extends Component {
     constructor(props) {
@@ -11,43 +13,50 @@ class Task extends Component {
          fadeAnim: new Animated.Value(0) 
         };
     }
+    
     componentDidMount() {
         Animated.timing(this.state.fadeAnim, { toValue: 1 }).start();                
     }
-    removeTask() {
-        this.props.removeTask(this.props.index);
-    }
+
+
     completeTask() {
-        this.setState({
-            status: !this.state.status
-        });
-        console.log('STATE FROM COMPLETETASK CALL', this.state);
-    }
+     const { title, uid, days } = this.props.task;
+        if (this.props.status === 'Complete') {
+            this.props.taskEdit({ title, status: 'Incomplete', days, uid });
+        } else if (this.props.status === 'Incomplete') {
+            this.props.taskEdit({ title, status: 'Complete', days, uid });
+            }
+        }
+    removeTask() {
+     const { uid } = this.props.task;
+        this.props.taskRemove({ uid });
+        }
     completeOrNah() {
-        if (this.state.status) {
+        if (this.state.status === 'Complete') {
             return 'COMPLETE';
         } 
             return 'INCOMPLETE';
     }
     buttonTextConditional() {
-        if (this.state.status) {
-            return 'incomplete';
+        if (this.props.status === 'Incomplete') {
+            return 'Complete';
         } 
-            return 'complete';
+            return 'Incomplete';
     }
     render() {
         return (
         <Animated.View style={{ padding: 5, opacity: this.state.fadeAnim }}>
-            <Text style={styles.welcome}> {this.props.text} </Text>
-            <Text style={styles.welcome}> COMPLETED: {this.completeOrNah()} </Text>
-            <Button onPress={this.completeTask.bind(this)}>
-                Tap to {this.buttonTextConditional()}
+            <Text style={styles.welcome}> {this.props.title} </Text>
+            <Text style={styles.welcome}> {this.props.status} </Text>
+            <Text style={styles.welcome}> {this.props.days} </Text>
+            <Button onPress={this.completeTask.bind(this)} >
+                Tap to mark {this.buttonTextConditional()}
             </Button>
             <Button onPress={this.removeTask.bind(this)}>
-                X
+                Delete Task
             </Button>
         </Animated.View>);
     }
 }
 
-export default Task;
+export default connect(null, { taskEdit, taskRemove })(Task);

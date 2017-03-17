@@ -1,8 +1,6 @@
 const styles = {
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#4CAF50'
   },
   welcome: {
@@ -34,6 +32,20 @@ const styles = {
       flexDirection: 'row',
       alignItems: 'center'
   },
+  congratulatory: {
+    width: 300,
+    height: 420,
+    backgroundColor: '#E1BC29'
+  },
+  standard: {
+    width: 300,
+    height: 420,
+    backgroundColor: '#4CAF50'
+  },
+  congratsContainer: {
+    flex: 1,
+    backgroundColor: '#E1BC29'
+  }
 };
 
 export default styles;
