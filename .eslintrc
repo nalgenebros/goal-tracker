@@ -1,7 +1,0 @@
-{
-	"extends": "rallycoding",
-	"run": "onSave",
-	"rules": {
-		"arrow-body-style": 0
-	}
-}

@@ -44,12 +44,6 @@ class Task extends Component {
   }
 
   renderDays() {
-    console.log('INSIDE RENDER DAYS');
-    // forOwn(this.props.days, (dayBoolean, day) => {
-    //   if (dayBoolean) {
-    //     return <Text style={styles.welcome}> {day} </Text>
-    //   }
-    // })
     const daysSelected = [];
 
     for (let day in this.props.days) {
@@ -58,10 +52,7 @@ class Task extends Component {
       }
     }
 
-    console.log('daysSelected', daysSelected);
-
     return daysSelected;
-
   }
 
   render() {
@@ -70,7 +61,6 @@ class Task extends Component {
         <Text style={styles.welcome}> {this.props.title} </Text>  
         <Text style={styles.welcome}> {this.props.status} </Text>
         <View>
-          <Text style={styles.welcome}> blah blah </Text>
           {this.renderDays().map((day) => {
             return <Text style={styles.welcome}> {day} </Text>
           })}
