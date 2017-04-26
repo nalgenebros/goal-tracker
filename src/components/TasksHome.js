@@ -16,6 +16,7 @@ class TasksHome extends Component {
       alertModalVisible: false
      };
   }
+
   componentWillMount() {
       this.props.tasksFetch();
       this.createDataSource(this.props);
@@ -27,6 +28,7 @@ class TasksHome extends Component {
       //this.props is still the old set of props
       this.createDataSource(nextProps);
   }
+
   createDataSource({ tasks }) {
       const ds = new ListView.DataSource({
           rowHasChanged: (r1, r2) => r1 !== r2
@@ -34,9 +36,11 @@ class TasksHome extends Component {
 
       this.dataSource = ds.cloneWithRows(tasks);
   }
+
   navToCreateTask() {
     Actions.createTask();
   }
+
   removeTask(index) {
     const tasks = this.state.tasks;
     tasks.splice(index, 1);
@@ -44,17 +48,21 @@ class TasksHome extends Component {
       tasks
     });
   }
+
   closeModal() {
       this.setState({ alertModalVisible: false });
   }
+
   navToDayView() {
     Actions.tasksByDay();
   }
+
   renderRow(task) {
-      return <Task title={task.title} status={task.status} task={task} />;
+      return <Task title={task.title} status={task.status} task={task} days={task.days} />;
   }
-    render() {
-        return (
+
+  render() {
+    return (
       <View style={styles.container}>
         <Card>
           <CardSection>

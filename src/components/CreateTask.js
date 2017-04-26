@@ -15,41 +15,41 @@ class CreateTask extends Component {
             days });
     }
     render() {
-        return (
-            <View style={styles.container}>
-                <Card>
-                    <CardSection>
-                        <Input
-                        placeholderTextColor={'#FFF'}
-                        placeholder='Add a Task!' 
-                        onChangeText={value => this.props.taskUpdate({ prop: 'title', value })}
-                        label='Task Title'
-                        />
-                    </CardSection>
+      return (
+        <View style={styles.container}>
+          <Card>
+              <CardSection>
+                  <Input
+                  placeholderTextColor={'#FFF'}
+                  placeholder='Add a Task!' 
+                  onChangeText={value => this.props.taskUpdate({ prop: 'title', value })}
+                  label='Task Title'
+                  />
+              </CardSection>
 
-                    <CardSection >
-                        <Text style={styles.pickerLabelStyle}>Status</Text>
-                        <Picker 
-                        selectedValue={this.props.status}
-                        onValueChange={value => this.props.taskUpdate({ prop: 'status', value })}
-                        style={{ flex: 1 }}
-                        >
-                            <Picker.Item label='Incomplete' value='Incomplete' />
-                            <Picker.Item label='Complete' value='Complete' />
-                        </Picker>
-                    </CardSection>
-                    <CardSection>
-                        <Button onPress={this.onButtonPress.bind(this)}>
-                            Add Task
-                        </Button>
-                    </CardSection>
-                    <CardSection>
-                        <DayPicker />
-                    </CardSection>
-                </Card>
-            </View>
-            
-        );
+              <CardSection >
+                  <Text style={styles.pickerLabelStyle}>Status</Text>
+                  <Picker 
+                  selectedValue={this.props.status}
+                  onValueChange={value => this.props.taskUpdate({ prop: 'status', value })}
+                  style={{ flex: 1 }}
+                  >
+                      <Picker.Item label='Incomplete' value='Incomplete' />
+                      <Picker.Item label='Complete' value='Complete' />
+                  </Picker>
+              </CardSection>
+              <CardSection>
+                  <DayPicker />
+              </CardSection>
+              <CardSection>
+                  <Button onPress={this.onButtonPress.bind(this)}>
+                      Add Task
+                  </Button>
+              </CardSection>
+          </Card>
+        </View>
+          
+      );
     }
 }
 
